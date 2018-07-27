@@ -1,14 +1,21 @@
-import 'package:flutter_currency_app/model/coin.dart';
+class ExchangeRate {
+  double baseValue;
+  String base;
+  String date;
+  Map<String, dynamic> rates;
 
-class ExchangeRateResponse {
-  final String base;
-  final String date;
-  final Coin rates;
+  ExchangeRate({this.baseValue, this.base, this.date, this.rates});
 
-  ExchangeRateResponse({this.base, this.date, this.rates});
-
-  ExchangeRateResponse.map(Map<dynamic, dynamic> map)
-      : base = map["base"],
+  ExchangeRate.fromMap(Map<dynamic, dynamic> map)
+      : baseValue = map["baseValue"],
+        base = map["base"],
         date = map["date"],
-        rates = map["rates"];
+        rates = map['rates'];
+
+  Map<dynamic, dynamic> toMap() => {
+        'baseValue': baseValue,
+        'base': base,
+        'date': date,
+        'rates': rates,
+      };
 }

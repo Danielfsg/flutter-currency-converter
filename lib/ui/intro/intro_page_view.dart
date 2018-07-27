@@ -1,48 +1,59 @@
-import 'package:circle_indicator/circle_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_currency_app/model/intro_model.dart';
-import 'package:flutter_currency_app/ui/intro_page.dart';
+import 'package:flutter_currency_app/model/intro.dart';
+import 'package:flutter_currency_app/ui/intro/intro_page.dart';
+import 'package:flutter_currency_app/ui/intro/intro_page_item.dart';
+import 'package:page_view_indicator/page_view_indicator.dart';
 
 class IntroPageView extends IntroPageState {
-  final PageController controller = new PageController();
-
-  final pageList = <IntroPageItem>[
-    new IntroPageItem(item: introItems[0]),
-    new IntroPageItem(item: introItems[1]),
-    new IntroPageItem(item: introItems[2]),
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return new Scaffold(
-      body: new IntroductionWidget(
-        pageList: pageList,
-        circleIndicator: new CircleIndicator.withIntroduction(
-            pageList.length, 3.0, Colors.white70, Colors.white),
-        rightAction: () => startApp(context),
-        showRight: (page) => page == pageList.length - 1,
-        rightText: new Text("START"),
-        leftAction: () => startApp(context),
-        showLeft: (page) => true,
-        leftText: new Text("SKIP"),
-      ),
-    );
-  }
-}
-
-class IntroPageItem extends StatelessWidget {
-  IntroPageItem({this.item});
-
-  final IntroItem item;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.blue,
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[new Center(child: new Text(item.title))],
-        ));
+      backgroundColor: Colors.white.withOpacity(0.95),
+      body: Stack(
+        children: <Widget>[
+          PageView.builder(
+            controller: controller,
+            itemCount: introItems.length,
+            itemBuilder: (_, int i) => IntroPageItem(item: introItems[i]),
+          ),
+          Container(
+            alignment: Alignment.bottomRight,
+            margin: EdgeInsets.all(16.0),
+            child: _indicator(),
+          ),
+          Container(
+            alignment: Alignment.bottomLeft,
+            child: FlatButton(
+              key: const Key("SkipButton"),
+              padding: EdgeInsets.all(16.0),
+              onPressed: () => startApp(context),
+              child: Text("Skip",
+                  style: TextStyle(fontSize: 18.0, color: Colors.white)),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  PageViewIndicator _indicator() {
+    return PageViewIndicator(
+      pageController: controller,
+      length: introItems.length,
+      normalBuilder: (animationController) => Circle(
+            size: 8.0,
+            color: Colors.white,
+          ),
+      highlightedBuilder: (animationController) => ScaleTransition(
+            scale: CurvedAnimation(
+              parent: animationController,
+              curve: Curves.ease,
+            ),
+            child: Circle(
+              size: 12.0,
+              color: Colors.white70,
+            ),
+          ),
+    );
   }
 }
