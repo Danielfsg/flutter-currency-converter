@@ -6,4 +6,8 @@ class IntroPage extends StatefulWidget {
   State<StatefulWidget> createState() => new IntroPageView();
 }
 
-abstract class IntroPageState extends State<IntroPage> {}
+abstract class IntroPageState extends State<IntroPage> {
+  void startApp(BuildContext context) {
+    Navigator.popAndPushNamed(context, "");
+  }
+}
