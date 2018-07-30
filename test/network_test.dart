@@ -15,7 +15,7 @@ main() {
           new Future<http.Response>.value(http.Response(response, 200)));
 
       expect(await fetchLatestRates(client, DEFAULT_BASE),
-          const TypeMatcher<ExchangeRate>());
+          const isInstanceOf<ExchangeRate>());
     });
 
     test('http call completes with and error', () async {
