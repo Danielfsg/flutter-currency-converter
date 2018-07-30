@@ -22,7 +22,7 @@ abstract class IntroPageState extends State<IntroPage> {
   final PageController controller = new PageController();
 
   @protected
-  void startApp(BuildContext context) async {
+  void goHome(BuildContext context) async {
     final SharedPreferences pref = await sharedPreferences;
     pref.setBool(SKIP_INTRO, true);
     Navigator.of(context).pushReplacementNamed(HomePage.path);

@@ -11,49 +11,66 @@ class IntroPageView extends IntroPageState {
       backgroundColor: Colors.white.withOpacity(0.95),
       body: Stack(
         children: <Widget>[
-          PageView.builder(
-            controller: controller,
-            itemCount: introItems.length,
-            itemBuilder: (_, int i) => IntroPageItem(item: introItems[i]),
-          ),
-          Container(
-            alignment: Alignment.bottomRight,
-            margin: EdgeInsets.all(16.0),
-            child: _indicator(),
-          ),
-          Container(
-            alignment: Alignment.bottomLeft,
-            child: FlatButton(
-              key: const Key("SkipButton"),
-              padding: EdgeInsets.all(16.0),
-              onPressed: () => startApp(context),
-              child: Text("Skip",
-                  style: TextStyle(fontSize: 18.0, color: Colors.white)),
-            ),
+          _pageView(),
+          _indicator(),
+          _skipButton(),
+        ],
+      ),
+    );
+  }
+
+  Widget _pageView() {
+    return PageView.builder(
+      controller: controller,
+      itemCount: introItems.length,
+      itemBuilder: (_, int i) => IntroPageItem(item: introItems[i]),
+    );
+  }
+
+  Widget _indicator() {
+    return Container(
+      alignment: Alignment.bottomRight,
+      margin: EdgeInsets.all(16.0),
+      child: Row(
+        children: <Widget>[
+          PageViewIndicator(
+            pageController: controller,
+            length: introItems.length,
+            normalBuilder: (animationController) => Circle(
+                  size: 8.0,
+                  color: Colors.white,
+                ),
+            highlightedBuilder: (animationController) => ScaleTransition(
+                  scale: CurvedAnimation(
+                    parent: animationController,
+                    curve: Curves.ease,
+                  ),
+                  child: Circle(
+                    size: 12.0,
+                    color: Colors.white70,
+                  ),
+                ),
           ),
         ],
       ),
     );
   }
 
-  PageViewIndicator _indicator() {
-    return PageViewIndicator(
-      pageController: controller,
-      length: introItems.length,
-      normalBuilder: (animationController) => Circle(
-            size: 8.0,
+  Widget _skipButton() {
+    return Container(
+      alignment: Alignment.bottomLeft,
+      child: FlatButton(
+        key: const Key("SkipButton"),
+        padding: EdgeInsets.all(16.0),
+        onPressed: () => goHome(context),
+        child: Text(
+          "Skip",
+          style: TextStyle(
+            fontSize: 18.0,
             color: Colors.white,
           ),
-      highlightedBuilder: (animationController) => ScaleTransition(
-            scale: CurvedAnimation(
-              parent: animationController,
-              curve: Curves.ease,
-            ),
-            child: Circle(
-              size: 12.0,
-              color: Colors.white70,
-            ),
-          ),
+        ),
+      ),
     );
   }
 }
