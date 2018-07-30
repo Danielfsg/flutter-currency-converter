@@ -24,7 +24,7 @@ abstract class HomePageState extends State<HomePage> {
   Repository repository = new Repository();
 
   @protected
-  exchangeRate([String base = "EUR"]) => repository.getExchangeRate(base);
+  exchangeRate(String base) => repository.getExchangeRate(base);
 
   @protected
   final TextEditingController valueController =
@@ -45,7 +45,7 @@ abstract class HomePageState extends State<HomePage> {
       SharedPreferences.getInstance();
 
   @protected
-  void saveSelectedValues() async {
+  void saveSelectedValues() {
     sharedPreferences.then((pref) {
       pref.setDouble(SAVED_VALUE, selectedValue);
       pref.setString(SAVED_CURRENCY, selectedCurrency);
@@ -53,10 +53,12 @@ abstract class HomePageState extends State<HomePage> {
   }
 
   @protected
-  void getSelectedValues() async {
-    final SharedPreferences pref = await sharedPreferences;
-    selectedValue = pref.getDouble(SAVED_VALUE) ?? 10.0;
-    selectedCurrency = pref.getString(SAVED_CURRENCY) ?? "EUR";
+  void getSelectedValues() {
+    sharedPreferences.then((pref) {
+      selectedValue = pref.getDouble(SAVED_VALUE) ?? 10.0;
+      selectedCurrency = pref.getString(SAVED_CURRENCY) ?? "EUR";
+      setState(() {});
+    });
   }
 
   @override

@@ -28,7 +28,7 @@ class HomePageView extends HomePageState {
     );
   }
 
-  Widget _exchangeRateWidget(var value, [String base = "EUR"]) {
+  Widget _exchangeRateWidget(double value, String base) {
     //var formatBase = formatCurrency(base, value);
     return Container(
       padding: const EdgeInsets.only(bottom: 8.0),
@@ -85,7 +85,7 @@ class HomePageView extends HomePageState {
     );
   }
 
-  Widget _exchangeRateListWidget(double value, [String base = "EUR"]) {
+  Widget _exchangeRateListWidget(double value, String base) {
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.only(top: 8.0),
