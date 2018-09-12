@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-const String URL_LATEST_BASE = "https://exchangeratesapi.io/api/latest?base=";
+const String URL_LATEST_BASE = "https://api.exchangeratesapi.io/latest?base=";
 
 // String constants
 const String SKIP_INTRO = "SKIP_INTRO";
