@@ -4,7 +4,7 @@ A flutter currency exchange app.
 
 ### Packages
 - [intl](https://pub.dartlang.org/packages/intl)
-- [circle_indicator](https://pub.dartlang.org/packages/circle_indicator)
+- [page_view_indicator](https://pub.dartlang.org/packages/page_view_indicator)
 - [shared_preferences](https://pub.dartlang.org/packages/shared_preferences)
 - [flutter_launcher_icons](https://pub.dartlang.org/packages/flutter_launcher_icons)
 
