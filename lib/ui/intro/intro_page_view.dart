@@ -21,7 +21,7 @@ class IntroPageView extends IntroPageState {
 
   Widget _pageView() {
     return PageView.builder(
-      controller: controller,
+      onPageChanged: (index) => pageIndexNotifier.value = index,
       itemCount: introItems.length,
       itemBuilder: (_, int i) => IntroPageItem(item: introItems[i]),
     );
@@ -30,11 +30,12 @@ class IntroPageView extends IntroPageState {
   Widget _indicator() {
     return Container(
       alignment: Alignment.bottomRight,
-      margin: EdgeInsets.all(16.0),
+      margin: EdgeInsets.all(12.0),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           PageViewIndicator(
-            pageController: controller,
+            pageIndexNotifier: pageIndexNotifier,
             length: introItems.length,
             normalBuilder: (animationController) => Circle(
                   size: 8.0,

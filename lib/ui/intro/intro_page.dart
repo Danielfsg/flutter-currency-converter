@@ -19,6 +19,9 @@ abstract class IntroPageState extends State<IntroPage> {
       SharedPreferences.getInstance();
 
   @protected
+  final pageIndexNotifier = ValueNotifier<int>(0);
+
+  @protected
   final PageController controller = new PageController();
 
   @protected

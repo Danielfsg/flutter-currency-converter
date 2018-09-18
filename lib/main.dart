@@ -34,7 +34,7 @@ class App extends StatelessWidget {
       ),
       home: defaultHome,
       routes: routes,
-      debugShowCheckedModeBanner: true,
+      debugShowCheckedModeBanner: false,
     );
   }
 }

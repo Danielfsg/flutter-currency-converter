@@ -1,6 +1,6 @@
 name: flutter_currency_app
 description: A currency exchange app made with flutter.
-version: 0.0.2
+version: 0.0.3
 author: Daniel Guerreiro<dfsguer@gmail.com>
 
 dependencies:
@@ -8,16 +8,16 @@ dependencies:
     sdk: flutter
 
   intl: ^0.15.7
-  page_view_indicator: ^0.1.0
-  #circle_indicator: ^0.0.7
   shared_preferences: ^0.4.2
+  page_view_indicator: ^0.3.0+1
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  mockito: ^2.2.3
-  flutter_launcher_icons: ^0.5.2
+  mockito: ^3.0.0
+  flutter_launcher_icons: ^0.6.1
 
 
 flutter:
